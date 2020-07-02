@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .mess{
+        width: 400px;
+        height: 500px;
+        margin: 100px auto;
+        /* background-color: #eee; */
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.5em;
+        /* padding-top: 10px; */
+      }
+      
+      input{
+        height: 30px;
+        font-size: 1em;
+        border: none;
+        background-color: rgb(243, 243, 243);
+        text-align: left;
+      }
+      form div{
+        margin: 10px;
+        font-size: 18px;
+        text-align: start;
+      }
+      button{
+        width: 100%;
+        height: 35px;
+        /* border-radius: 15px; */
+        background-color: rgb(238, 235, 230);
+        border: none;
+        font-size: 18px;
+      }
+      textarea{
+        width: 370px;
+        height: 100px;
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .invalid{
+        border: 1px solid red;
+      }
+      .error-msg{
+        font-size: 12px;
+        color: red;
+      }
+      .visible{
+        display: none;
+      }
+
+    </style>
+
+  </head>
+<div class="header">
+<div class="mess">
+<form action="" novalidate id = 'myform'>
+  <p> написать нам:</p>
+  <div>
+    <label>ваше имя<br><input class = 'input invalid' type="text" id = 'name'>
+    <div class = 'error-msg visible' id = 'name'>Имя содержать только буквы</div>
+  </label>
+  </div>
+  <div>
+    <label>ваше телефон<br><input class = 'input invalid' type="text" id = 'phone'>
+    <div class = 'error-msg visible' id = 'phone'>Шаблон телефона +7(000)000-00-00</div></label>
+  </div>
+  <div>
+    <label>ваше почта<br><input class = 'input invalid' type="text" id = 'email'>
+    <div class = 'error-msg visible' id = 'email'>Шаблон e-mail: mymail@mail.ru</div></label>
+  </div>
+  <div>
+    <label>сообщение:<br><textarea></textarea>
+    <div class = 'error-msg visible'></div></label>
+  </div>
+  <button disabled>отправить</button>
+</form>
+</div>
+</div>
+
+<script>
+  window.onload=()=>{
+    document.querySelector('#myform').addEventListener('change', (event)=>{
+      let valid = new Validator('myform', event.target);
+    })
+
+    class Validator {
+      constructor(form, field){
+        this.form = form
+        this.target = field
+        this.errorClass = document.querySelector(`#${field.id} ~ div`)
+        this.patterns = {
+          name: /^[a-zа-яё]{2,}$/i,
+          phone: /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/,
+          email: /^[\w._-]+@\w+\.[a-z]{2,4}$/
+        } 
+        this._init()
+      }
+      _init(){
+        this._validateField(this.target)
+        if(!document.getElementById(this.form).querySelectorAll('.invalid').length) {
+           document.querySelector('button').removeAttribute('disabled')
+          }
+      }
+
+      _validateField(field){
+            if (this.patterns[field.id]){
+              if (this.patterns[field.id].test(field.value)) {
+                this.errorClass.classList.add('visible')
+                this._watchField(field)
+              } else {
+                    field.classList.add ('invalid')
+                    this.errorClass.classList.remove('visible')
+                     }
+            }
+      }
+
+      _watchField(field){
+        if(!field.classList.value.match('/invalid/i')){
+          field.classList.remove('invalid')
+          }      
+      }
+    }
+  }
+</script>
+  </body>
+</html>
