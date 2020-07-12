@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <title>Интернет-магазин</title>
+</head>
+<body>
+  <div id='app'>
+    
+    <header>
+      <div class="logo">Интернет-магазин</div>
+      <div class="cart">
+        <search ></search>
+        <basket ref='basket'></basket> 
+      </div>        
+    </header>
+    <products ref='products'></products>
+    <error ref="error"></error>
+  </div>
+
+  <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/components/search.js"></script>
+  <script src="js/components/product.js"></script>
+  <script src="js/components/catalog.js"></script>
+  <script src="js/components/basket_item.js"></script>
+  <script src="js/components/basket.js"></script>
+  <script src="js/components/error.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
